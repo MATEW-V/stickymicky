@@ -1,4 +1,5 @@
 import './Header.css'
+import { Link } from "react-router-dom";
 
 function Header() {
     return (
@@ -19,6 +20,10 @@ function Header() {
                 <div className="subheader-items2">
                     <h1>Recent</h1>
                 </div>
+                {/* set links */}
+                <Link to={`/settings`} className="login">Settings</Link>
+                <Link to={`/cart`} className="register">Cart</Link>
+                <Link to={`/register`} className="register">Logout</Link>
             </div>
         </div>
     )

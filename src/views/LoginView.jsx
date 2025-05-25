@@ -1,7 +1,6 @@
 import './LoginView.css'
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import image from './images/one-piece.PNG'
 import Footer from './components/Footer.jsx';
 import Header from "./components/Header.jsx";
 

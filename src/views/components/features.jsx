@@ -1,12 +1,12 @@
 import './Features.css'
-import { Link } from "react-router-dom";
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 function Features() {
     const [movies, setMovies] = useState([]);
     const randmovie = Math.floor(Math.random() * 12);
     const randpage = Math.floor(Math.random() * 20);
-    const apiUrl = `https://api.themoviedb.org/3/movie/now_playing?api_key=${import.meta.env.VITE_KEY}&language=en-US&page=` + randpage;
+    //PUT YOUR KEY IN HIDDEN OR WTV
+    const apiUrl = `https://api.themoviedb.org/3/movie/now_playing?api_key=be3c7266366ad88b56a8397a0a3e668d&language=en-US&page=` + randpage;
 
     useEffect(() => {
         const fetchMovies = async () => {
@@ -15,14 +15,13 @@ function Features() {
                 const data = await response.json();
                 setMovies(data.results.slice(randmovie, randmovie + 4)); // random movie then next six
             } catch (error) {
-                setError('Failed to fetch movies');
+                console.log();
             }
         };
         fetchMovies();
     }, []);
 
     return (
-        
         <div className = "movie-posters">
             {movies.map((movie) => {
                 const movieImage = movie.poster_path
