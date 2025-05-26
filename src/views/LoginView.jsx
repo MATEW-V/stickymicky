@@ -1,36 +1,49 @@
 import './LoginView.css'
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useStoreContext } from '../context';
 import Footer from './components/Footer.jsx';
-import Header from "./components/Header.jsx";
+import NavBar from './components/NavBar.jsx';
 
 function LoginView() {
-    const [password, setPassword] = useState('');
+    const { setEmail, email, setPassword, password } = useStoreContext();
+    const [uemail, setUEmail] = useState('');
+    const [upassword, setUPassword] = useState('');
     const navigate = useNavigate();
 
-    function login(e) {
+    function login(event) {
+        event.preventDefault();
 
-        e.preventDefault();
-        if (password === "goodpassword") {
+        if (email == uemail && password == upassword) {
             navigate('/movies/genre');
         } else {
-            alert("Wrong password!");
+            alert("Invalid email or password!");
+            console.log(email, password, uemail, upassword);
         }
     }
 
     return (
-        <form onSubmit={(event) => { login(event) }}>
+        <form onSubmit={login}>
             <div className="login-header">
-                <Header />
+                <NavBar />
             </div>
             <div className="login-view">
-                {/* <img className="login-background" src={image} /> */}
                 <div className="login-box">
                     <h4 className="input-text">Email:</h4>
-                    <input className="email" type="email" required/>
+                    <input className="email" type="email"
+                        id="email"
+                        name="email"
+                        value={uemail}
+                        onChange={(event) => setUEmail(event.target.value)}
+                        required />
                     <h4 className="input-text">Password:</h4>
-                    <input className="password" type="password" id="password" name="password" value={password} onChange={(event) => { setPassword(event.target.value) }} required />
-                    <button className="login-button">Login</button>
+                    <input className="password" type="password"
+                        id="password"
+                        name="password"
+                        value={upassword}
+                        onChange={(event) => setUPassword(event.target.value)}
+                        required />
+                    <button type="submit" className="login-button">Login</button>
                 </div>
             </div>
             <div className="login-footer">

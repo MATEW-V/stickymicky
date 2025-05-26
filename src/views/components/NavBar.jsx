@@ -6,7 +6,7 @@ function NavBar() {
     return (
         <div className="navBar">
             <div className="logo">
-                <h1>DebtFlix</h1>
+                <Link to={`/`} className="logo">DebtFlix</Link>
             </div>
             <div className="subheaders">
                 <div className="subheader-items">
