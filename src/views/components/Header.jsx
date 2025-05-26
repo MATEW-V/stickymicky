@@ -43,16 +43,16 @@ function Header() {
             </div>
             <div className="subheaders2">
                 <div className="subheader-items2">
-                    <h1>Movies</h1>
+                    <h1>Recent</h1>
+                </div>
+                <div className="subheader-items2">
+                    <h1>Popular</h1>
                 </div>
                 <div className="search">
-                            <div className="searchbox">
-                                <input type="text" placeholder="Search..." />
-                            </div>
-                            <button className="butsearch">Search</button>
-                        </div>
-                <div className="subheader-items2">
-                    <h1>Recent</h1>
+                    <div className="searchbox">
+                        <input type="text" placeholder="Search..." />
+                    </div>
+                    <button className="butsearch">Search</button>
                 </div>
                 <Link to={`/settings`} className="login">Settings</Link>
                 <Link to={`/cart`} className="register">Cart</Link>
