@@ -9,6 +9,7 @@ import MoviesView from "../src/Views/MoviesView";
 import GenreLogin from "../src/Views/GenreLogin";
 import DetailsView from "../src/Views/DetailsView";
 import ErrorView from "../src/Views/ErrorView";
+import SearchView from './views/SearchView';
 import './App.css'
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <Route path="/settings" element={<SettingsView />} />
           <Route path="/movies" element={<MoviesView />}>
             <Route path="genre" element={<GenreLogin />} />
+            <Route path="search" element={<SearchView />}></Route>
             <Route path=":id" element={<DetailsView />} />
           </Route>
           <Route path="*" element={<ErrorView />} />

@@ -1,40 +1,36 @@
 import './Header.css'
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-//import { useStoreContext } from "../context";
-// import { Map } from "immutable";
-// import { useState, useCallback, useRef } from "react";
+import { useState, useCallback, useRef } from "react";
 
 function Header() {
-    // const { name, setName, setLastName, setEmail, setPassword, selectedGenres, setSelectedGenres, setCart, loggedIn, setLoggedIn } = useStoreContext();
-    // const navigate = useNavigate();
-    // const [query, setQuery] = useState("");
-    // const debounceTimer = useRef(null);
-    // const [results, setResults] = useState([]);
+    const navigate = useNavigate();
+    const [message, setMessage] = useState("");
 
-    // const handleSearchChange = useCallback((e) => {
-    //     const value = e.target.value;
-    //     setQuery(value);
-    //     clearTimeout(debounceTimer.current);
+    function debounce(func, delay) {
+        let timer;
+        return function (...args) {
+            clearTimeout(timer);
+            timer = setTimeout(() => {
+                func(...args);
+            }, delay);
+        };
+    }
 
-    //     debounceTimer.current = setTimeout(() => {
-    //         if (value.trim()) {
-    //             fetch(`https://api.themoviedb.org/3/search/movie?api_key=${import.meta.env.VITE_TMDB_KEY}&query=${encodeURIComponent(value)}&include_adult=false`)
-    //                 .then((res) => res.json())
-    //                 .then((data) => {
-    //                     if (data.results) {
-    //                         setResults(data.results.slice(0, 5));
-    //                     }
-    //                 })
-    //                 .catch((err) => {
-    //                     console.error("Search failed:", err);
-    //                     setResults([]);
-    //                 });
-    //         } else {
-    //             setResults([]);
-    //         }
-    //     }, 500);
-    // }, []);
+    const handleSearch = useCallback(
+        debounce((query) => {
+            if (query.trim()) {
+                navigate(`/movies/search?query=${encodeURIComponent(query)}`);
+            }
+        }, 400),
+        [navigate]
+    );
+
+    const handleKeyDown = (event) => {
+        if (event.key === "Enter") {
+            handleSearch(message);
+        }
+    };
 
     return (
         <div className="header">
@@ -50,13 +46,18 @@ function Header() {
                 </div>
                 <div className="search">
                     <div className="searchbox">
-                        <input type="text" placeholder="Search..." />
+                        <input
+                            type="text"
+                            placeholder="Search..."
+                            value={message}
+                            onChange={(e) => setMessage(e.target.value)}
+                            onKeyDown={handleKeyDown}
+                        />
                     </div>
-                    <button className="butsearch">Search</button>
                 </div>
                 <Link to={`/settings`} className="login">Settings</Link>
                 <Link to={`/cart`} className="register">Cart</Link>
-                <Link to={`/register`} className="register">Logout</Link>
+                <Link to={`/`} className="register">Logout</Link>
             </div>
         </div>
     )
