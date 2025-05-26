@@ -8,7 +8,7 @@ import "./DetailsView.css";
 function DetailsView() {
     const [movie, setMovie] = useState([]);
     const params = useParams();
-
+//API KEY
     useEffect(() => {
         (async function getMovie() {
             const response = await axios.get(
