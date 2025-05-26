@@ -1,30 +1,30 @@
-import './Header.css'
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import { useState, useCallback, useRef } from "react";
+import './Header.css';
+import { Link, useNavigate } from "react-router-dom";
+import { useState, useCallback, useRef, useEffect } from "react";
 
 function Header() {
     const navigate = useNavigate();
     const [message, setMessage] = useState("");
 
-    function debounce(func, delay) {
-        let timer;
-        return function (...args) {
-            clearTimeout(timer);
-            timer = setTimeout(() => {
-                func(...args);
-            }, delay);
-        };
-    }
+    const debounceTimeout = useRef(null);
 
-    const handleSearch = useCallback(
-        debounce((query) => {
-            if (query.trim()) {
-                navigate(`/movies/search?query=${encodeURIComponent(query)}`);
-            }
-        }, 400),
-        [navigate]
-    );
+    const handleSearch = useCallback((query) => {
+        if (query.trim()) {
+            navigate(`/movies/search?query=${encodeURIComponent(query)}&page=1`);
+        }
+    }, [navigate]);
+
+    useEffect(() => {
+        if (debounceTimeout.current) {
+            clearTimeout(debounceTimeout.current);
+        }
+
+        debounceTimeout.current = setTimeout(() => {
+            handleSearch(message);
+        }, 500);
+
+        return () => clearTimeout(debounceTimeout.current);
+    }, [message, handleSearch]);
 
     const handleKeyDown = (event) => {
         if (event.key === "Enter") {
@@ -60,7 +60,7 @@ function Header() {
                 <Link to={`/`} className="register">Logout</Link>
             </div>
         </div>
-    )
+    );
 }
 
 export default Header;

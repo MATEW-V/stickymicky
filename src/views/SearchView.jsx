@@ -5,23 +5,21 @@ import Header from "./components/Header.jsx";
 import Footer from "./components/Footer.jsx";
 import { useStoreContext } from '../context';
 import "./SearchView.css";
-//API KEY CHANGE
+
+// API KEY
 const TMDB_API_KEY = 'be3c7266366ad88b56a8397a0a3e668d';
 
 const SearchView = () => {
     const [searchParams, setSearchParams] = useSearchParams();
-    const queryParam = searchParams.get('query') || '';
-    const pageParam = parseInt(searchParams.get('page')) || 1;
+    const query = searchParams.get('query') || '';
+    const page = parseInt(searchParams.get('page')) || 1;
 
-    const [query, setQuery] = useState(queryParam);
     const [results, setResults] = useState([]);
-    const [page, setPage] = useState(pageParam);
     const [totalPages, setTotalPages] = useState(1);
     const [loading, setLoading] = useState(false);
 
     const debounceTimeout = useRef(null);
     const navigate = useNavigate();
-
     const { cart, addToCart } = useStoreContext();
 
     const fetchResults = async (query, page) => {
@@ -56,20 +54,13 @@ const SearchView = () => {
         }
 
         debounceTimeout.current = setTimeout(() => {
-            fetchResults(queryParam, pageParam);
+            fetchResults(query, page);
         }, 500);
 
         return () => clearTimeout(debounceTimeout.current);
-    }, [queryParam, pageParam]);
-
-    const handleInputChange = (e) => {
-        const newQuery = e.target.value;
-        setQuery(newQuery);
-        setSearchParams({ query: newQuery, page: 1 });
-    };
+    }, [query, page]);
 
     const goToPage = (newPage) => {
-        setPage(newPage);
         setSearchParams({ query, page: newPage });
     };
 
