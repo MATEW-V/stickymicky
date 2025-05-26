@@ -56,8 +56,8 @@ function RegisterView() {
       return;
     }
 
-    if (selectedGenres.size < 10) {
-      alert("Please select at least 10 genres.");
+    if (selectedGenres.size < 5) {
+      alert("Please select at least 5 genres.");
       return;
     }
 
