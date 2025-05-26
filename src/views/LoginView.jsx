@@ -1,4 +1,4 @@
-import './LoginView.css'
+import './LoginView.css';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useStoreContext } from '../context';
@@ -13,7 +13,6 @@ function LoginView() {
 
     function login(event) {
         event.preventDefault();
-
         if (email == uemail && password == upassword) {
             navigate('/movies/genre');
         } else {
