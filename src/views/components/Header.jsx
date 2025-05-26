@@ -5,7 +5,7 @@ function Header() {
     return (
         <div className="header">
             <div className="header-logo">
-                <h1>DebtFlix</h1>
+                <Link to={`/`} className="header-logo">DebtFlix</Link>
             </div>
             <div className="subheaders2">
                 <div className="subheader-items2">
@@ -20,7 +20,6 @@ function Header() {
                 <div className="subheader-items2">
                     <h1>Recent</h1>
                 </div>
-                {/* set links */}
                 <Link to={`/settings`} className="login">Settings</Link>
                 <Link to={`/cart`} className="register">Cart</Link>
                 <Link to={`/register`} className="register">Logout</Link>

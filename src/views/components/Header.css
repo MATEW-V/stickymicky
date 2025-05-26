@@ -5,16 +5,18 @@
     background-color: black;
     align-items: center;
     grid-template-areas: "header-logo subheaders2";
-    position:relative;
+    position: relative;
 }
 
 .header-logo {
     flex: 1;
+    font-size: 40px;
+    text-decoration:none;
     color: red;
     font-family: OCR A std, monospace;
     padding: 20px;
     position: relative;
-    bottom: 40px;
+    bottom: 30px;
 }
 
 .subheaders2 {
@@ -26,7 +28,7 @@
     font-family: Comic Sans MS, Comic Sans, cursive;
     position: relative;
     bottom: 40px;
-    gap:50px;
+    gap: 50px;
 }
 
 .subheader-items2 {
